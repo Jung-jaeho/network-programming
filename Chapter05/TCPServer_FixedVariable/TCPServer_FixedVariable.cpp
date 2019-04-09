@@ -97,6 +97,7 @@ int main(int argc, char *argv[])
 	int addrlen;
 	char buf[BUFSIZE+1];
 	int len;
+	int cnt=0;
 
 	while(1){
 		// accept()
@@ -135,6 +136,24 @@ int main(int argc, char *argv[])
 			buf[retval] = '\0';
 			printf("[TCP/%s:%d] %s\n", inet_ntoa(clientaddr.sin_addr),
 				ntohs(clientaddr.sin_port), buf);
+			while(1)
+			{
+				if(!strcmp(buf,arr[cnt].name)){
+					//server pass
+					retval = send( client_sock,(char*)&arr[cnt], sizeof(Person), 0 );
+				if ( retval == SOCKET_ERROR ) {
+					 err_display( "send()" );
+					}
+				break;
+				}
+				if(cnt>2)
+				{
+					printf("error\n");
+					cnt=0;
+					break;
+				}
+				cnt++;
+			}
 		}
 
 
@@ -142,6 +161,7 @@ int main(int argc, char *argv[])
 		closesocket(client_sock);
 		printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n",
 			inet_ntoa(clientaddr.sin_addr), ntohs(clientaddr.sin_port));
+		break;
 	}
 
 	// closesocket()
