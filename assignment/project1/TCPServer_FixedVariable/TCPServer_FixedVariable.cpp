@@ -6,12 +6,6 @@
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
-typedef struct Person{   // 구조체 이름은 _Person
-    char name[20];            // 공식명칭
-    char Nickname[20];            // 별명
-    char address[100];        // ipv4 address
-}Person;                  // typedef를 사용하여 구조체 별칭을 Person으로 정의
- 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
 {
@@ -38,7 +32,19 @@ void err_display(char *msg)
 	printf("[%s] %s", msg, (char *)lpMsgBuf);
 	LocalFree(lpMsgBuf);
 }
-
+// 도메인 이름 -> IPv4 주소
+BOOL GetIPAddr(char *name, IN_ADDR *addr)
+{
+	HOSTENT *ptr = gethostbyname(name);
+	if(ptr == NULL){
+		err_display("gethostbyname()");
+		return FALSE;
+	}
+	if(ptr->h_addrtype != AF_INET)
+		return FALSE;
+	memcpy(addr, ptr->h_addr, ptr->h_length);
+	return TRUE;
+}
 // 사용자 정의 데이터 수신 함수
 int recvn(SOCKET s, char *buf, int len, int flags)
 {
@@ -63,12 +69,6 @@ int main(int argc, char *argv[])
 {
 	int retval;
 
-	Person arr[3]={{"hello","abc","ddd"},{"hello1","abc1","ddd1"},{
-		"hello2","abc2","ddd2"}};
-
-
-
-	
 	// 윈속 초기화
 	WSADATA wsa;
 	if(WSAStartup(MAKEWORD(2,2), &wsa) != 0)
@@ -94,10 +94,10 @@ int main(int argc, char *argv[])
 	// 데이터 통신에 사용할 변수
 	SOCKET client_sock;
 	SOCKADDR_IN clientaddr;
+	IN_ADDR addr;
 	int addrlen;
 	char buf[BUFSIZE+1];
 	int len;
-	int cnt=0;
 
 	while(1){
 		// accept()
@@ -136,32 +136,17 @@ int main(int argc, char *argv[])
 			buf[retval] = '\0';
 			printf("[TCP/%s:%d] %s\n", inet_ntoa(clientaddr.sin_addr),
 				ntohs(clientaddr.sin_port), buf);
-			while(1)
-			{
-				if(!strcmp(buf,arr[cnt].name)){
-					//server pass
-					retval = send( client_sock,(char*)&arr[cnt], sizeof(Person), 0 );
-				if ( retval == SOCKET_ERROR ) {
-					 err_display( "send()" );
-					}
-				break;
-				}
-				if(cnt>2)
-				{
-					printf("error\n");
-					cnt=0;
-					break;
-				}
-				cnt++;
-			}
-		}
+			if(GetIPAddr(buf, &addr)){
+			// 성공이면 결과 출력
+			printf("IP 주소(변환 후) = %s\n", inet_ntoa(addr));
+	}
 
+		}
 
 		// closesocket()
 		closesocket(client_sock);
 		printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n",
 			inet_ntoa(clientaddr.sin_addr), ntohs(clientaddr.sin_port));
-		break;
 	}
 
 	// closesocket()

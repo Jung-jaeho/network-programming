@@ -2,7 +2,7 @@
 #include <winsock2.h>
 #include <stdio.h>
 
-#define TESTNAME "www.example.com"
+#define TESTNAME "www.naver.com"
 
 // 소켓 함수 오류 출력
 void err_display(char *msg)
@@ -31,19 +31,7 @@ BOOL GetIPAddr(char *name, IN_ADDR *addr)
 	return TRUE;
 }
 
-// IPv4 주소 -> 도메인 이름
-BOOL GetDomainName(IN_ADDR addr, char *name, int namelen)
-{
-	HOSTENT *ptr = gethostbyaddr((char *)&addr, sizeof(addr), AF_INET);
-	if(ptr == NULL){
-		err_display("gethostbyaddr()");
-		return FALSE;
-	}
-	if(ptr->h_addrtype != AF_INET)
-		return FALSE;
-	strncpy(name, ptr->h_name, namelen);
-	return TRUE;
-}
+
 
 int main(int argc, char *argv[])
 {
@@ -58,13 +46,6 @@ int main(int argc, char *argv[])
 	if(GetIPAddr(TESTNAME, &addr)){
 		// 성공이면 결과 출력
 		printf("IP 주소(변환 후) = %s\n", inet_ntoa(addr));
-	
-		// IP 주소 -> 도메인 이름
-		char name[256];
-		if(GetDomainName(addr, name, sizeof(name))){
-			// 성공이면 결과 출력
-			printf("도메인 이름(다시 변환 후) = %s\n", name);
-		}
 	}
 
 	WSACleanup();
