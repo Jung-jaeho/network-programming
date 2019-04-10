@@ -6,6 +6,7 @@
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
+
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
 {
@@ -33,16 +34,102 @@ void err_display(char *msg)
 	LocalFree(lpMsgBuf);
 }
 // 도메인 이름 -> IPv4 주소
-BOOL GetIPAddr(char *name, IN_ADDR *addr)
+// my modified buf -> name
+BOOL GetIPAddr(SOCKET sock, char *name, IN_ADDR *addr)
 {
 	HOSTENT *ptr = gethostbyname(name);
+	char *ip[100];
+	char *nickname[100];
+	char *standard;
+	int i,j; //ip number, nickname number
+	int x,y;
 	if(ptr == NULL){
 		err_display("gethostbyname()");
 		return FALSE;
 	}
 	if(ptr->h_addrtype != AF_INET)
 		return FALSE;
-	memcpy(addr, ptr->h_addr, ptr->h_length);
+	
+
+	//ip receive
+	for(i=0;ptr->h_addr_list[i]!=NULL;i++)
+	{
+		ip[i]=(char *)malloc(sizeof(char)*50);
+		strcpy(ip[i],inet_ntoa(*(struct in_addr*)ptr->h_addr_list[i]));
+	}
+
+
+	//nickname
+	for(j=0;ptr->h_aliases[j]!=NULL;j++)
+	{
+		nickname[j]=(char *)malloc(sizeof(char)*50);
+		strcpy(nickname[j],ptr->h_aliases[j]);
+	}
+
+	//standard name
+	standard=(char *)malloc(sizeof(char)*50);
+	strcpy(standard,ptr->h_name);
+
+	/////// standard name send
+	int len = strlen(standard);
+		// 데이터 보내기(고정 길이)
+		int retval = send(sock, (char *)&len, sizeof(int), 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+
+		// 데이터 보내기(가변 길이)
+		retval = send(sock, standard, len, 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+
+/////// standard nickname send
+	for(y=0;y<j;y++)
+	{
+			// '\n' 문자 제거
+		int len = strlen(name);
+		// 데이터 보내기(고정 길이)
+		int retval = send(sock, (char *)&len, sizeof(int), 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+
+		// 데이터 보내기(가변 길이)
+		retval = send(sock, name, len, 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+	}
+	/////// standard ip send
+	for(x=0;x<i;x++)
+	{
+	// '\n' 문자 제거
+		int len = strlen(ip[x]);
+		// 데이터 보내기(고정 길이)
+		int retval = send(sock, (char *)&len, sizeof(int), 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+		// 데이터 보내기(가변 길이)
+		retval = send(sock, &*ip[x], len, 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+	}
+	/////exit
+	len = strlen("end");
+		// 데이터 보내기(고정 길이)
+		retval = send(sock, (char *)&len, sizeof(int), 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+		// 데이터 보내기(가변 길이)
+		retval = send(sock, "end", len, 0);
+		if(retval == SOCKET_ERROR){
+			err_display("send()");
+		}
+		
 	return TRUE;
 }
 // 사용자 정의 데이터 수신 함수
@@ -68,6 +155,10 @@ int recvn(SOCKET s, char *buf, int len, int flags)
 int main(int argc, char *argv[])
 {
 	int retval;
+
+
+
+
 
 	// 윈속 초기화
 	WSADATA wsa;
@@ -122,7 +213,6 @@ int main(int argc, char *argv[])
 			}
 			else if(retval == 0)
 				break;
-
 			// 데이터 받기(가변 길이)
 			retval = recvn(client_sock, buf, len, 0);
 			if(retval == SOCKET_ERROR){
@@ -136,10 +226,10 @@ int main(int argc, char *argv[])
 			buf[retval] = '\0';
 			printf("[TCP/%s:%d] %s\n", inet_ntoa(clientaddr.sin_addr),
 				ntohs(clientaddr.sin_port), buf);
-			if(GetIPAddr(buf, &addr)){
+			if(GetIPAddr(client_sock, buf, &addr)){
 			// 성공이면 결과 출력
 			printf("IP 주소(변환 후) = %s\n", inet_ntoa(addr));
-	}
+			}
 
 		}
 

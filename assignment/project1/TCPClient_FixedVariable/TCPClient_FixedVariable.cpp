@@ -21,6 +21,26 @@ void err_quit(char *msg)
 	exit(1);
 }
 
+// 사용자 정의 데이터 수신 함수
+int recvn(SOCKET s, char *buf, int len, int flags)
+{
+	int received;
+	char *ptr = buf;
+	int left = len;
+
+	while(left > 0){
+		received = recv(s, ptr, left, flags);
+		if(received == SOCKET_ERROR)
+			return SOCKET_ERROR;
+		else if(received == 0)
+			break;
+		left -= received;
+		ptr += received;
+	}
+
+	return (len - left);
+}
+
 // 소켓 함수 오류 출력
 void err_display(char *msg)
 {
@@ -58,16 +78,23 @@ int main(int argc, char *argv[])
 
 	// 데이터 통신에 사용할 변수
 	char buf[BUFSIZE];
-	char *testdata[] = {
-		"www.naver.com",
-	};
+	char name[BUFSIZE];
 	int len;
 
 	// 서버와 데이터 통신
-	for(int i=0; i<1; i++){
+	for(int i=0; i<3; i++){
 		// 데이터 입력(시뮬레이션)
-		len = strlen(testdata[i]);
-		strncpy(buf, testdata[i], len);
+		
+		if(fgets(name,BUFSIZE+1,stdin) == NULL)
+		break;
+		// '\n' 문자 제거
+		len = strlen(name);
+		if(name[len-1] == '\n')
+			name[len-1] = '\0';
+		if(strlen(name) == 0)
+		break;
+		
+		strncpy(buf,name, len);
 
 		// 데이터 보내기(고정 길이)
 		retval = send(sock, (char *)&len, sizeof(int), 0);
@@ -82,9 +109,35 @@ int main(int argc, char *argv[])
 			err_display("send()");
 			break;
 		}
-		printf("[TCP 클라이언트] %s를 보냈습니다.\n",testdata[i]);
-	}
 
+		printf("[TCP 클라이언트] %s를 보냈습니다.\n",name);
+
+
+		while(strcmp("end",buf)){
+			// 데이터 받기(고정 길이)
+			retval = recvn(sock, (char *)&len, sizeof(int), 0);
+			if(retval == SOCKET_ERROR){
+				err_display("recv()");
+				break;
+			}
+			else if(retval == 0)
+				break;
+			// 데이터 받기(가변 길이)
+			retval = recvn(sock, buf, len, 0);
+			if(retval == SOCKET_ERROR){
+				err_display("recv()");
+				break;
+			}
+			else if(retval == 0)
+				break;
+
+			// 받은 데이터 출력
+			buf[retval] = '\0';
+			printf("%s\n", buf);
+
+
+		}
+	}
 	// closesocket()
 	closesocket(sock);
 
