@@ -1,3 +1,12 @@
+// 2019년 1학기 네트워크프로그래밍 숙제 1번 서버
+// 성명: 정재호 학번: 14011078
+// 플랫폼: VS2010
+// 작동하는 도메인 네임:
+//www.naver.com
+//www.youtube.com
+//www.daum.net
+
+
 #pragma comment(lib, "ws2_32")
 #include <winsock2.h>
 #include <stdlib.h>
@@ -35,18 +44,26 @@ void err_display(char *msg)
 }
 // 도메인 이름 -> IPv4 주소
 // my modified buf -> name
-BOOL GetIPAddr(SOCKET sock, char *name, IN_ADDR *addr)
+BOOL GetIPAddr(SOCKET sock, char *name, IN_ADDR *addr,SOCKADDR_IN claddr)
 {
+	SOCKADDR_IN clientaddr;
+	SOCKET listen_sock = socket(AF_INET, SOCK_STREAM, 0);
 	HOSTENT *ptr = gethostbyname(name);
 	char *ip[100];
 	char *nickname[100];
 	char *standard;
 	int i,j; //ip number, nickname number
 	int x,y;
+	clientaddr=claddr;
 	
 	if(!strcmp(name,"quit"))
 	{
-		return 0;
+		closesocket(sock);
+		printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n",
+			inet_ntoa(clientaddr.sin_addr), ntohs(clientaddr.sin_port));
+		closesocket(listen_sock);
+		WSACleanup();
+		exit(1);
 	}
 
 
@@ -65,6 +82,7 @@ BOOL GetIPAddr(SOCKET sock, char *name, IN_ADDR *addr)
 		if(retval == SOCKET_ERROR){
 			err_display("send()");
 		}
+
 		/////exit
 		len = strlen("다음도메인 입력하기");
 		// 데이터 보내기(고정 길이)
@@ -191,6 +209,8 @@ int main(int argc, char *argv[])
 
 	// 윈속 초기화
 	WSADATA wsa;
+
+	printf("14011078 정재호 네트워크 프로그래밍 숙제1번 서버\n");
 	if(WSAStartup(MAKEWORD(2,2), &wsa) != 0)
 		return 1;
 
@@ -255,8 +275,11 @@ int main(int argc, char *argv[])
 			buf[retval] = '\0';
 			printf("[TCP/%s:%d] %s\n", inet_ntoa(clientaddr.sin_addr),
 				ntohs(clientaddr.sin_port), buf);
-			if(GetIPAddr(client_sock, buf, &addr)){
+			if(GetIPAddr(client_sock, buf, &addr,clientaddr)){
 			// 성공이면 결과 출력
+			}
+			else
+			{
 			}
 
 		}

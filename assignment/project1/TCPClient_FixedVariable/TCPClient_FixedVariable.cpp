@@ -1,3 +1,12 @@
+// 2019년 1학기 네트워크프로그래밍 숙제 1번 클라이언트
+// 성명: 정재호 학번: 14011078
+// 플랫폼: VS2010
+// 작동하는 도메인 네임:
+//www.naver.com
+//www.youtube.com
+//www.daum.net
+
+
 #pragma comment(lib, "ws2_32")
 #include <winsock2.h>
 #include <stdlib.h>
@@ -60,6 +69,7 @@ int main(int argc, char *argv[])
 
 	// 윈속 초기화
 	WSADATA wsa;
+	printf("14011078 정재호 네트워크 프로그래밍 숙제1번 클라이언트\n");
 	if(WSAStartup(MAKEWORD(2,2), &wsa) != 0)
 		return 1;
 
@@ -82,7 +92,7 @@ int main(int argc, char *argv[])
 	int len;
 
 	// 서버와 데이터 통신
-	for(int i=0; i<5; i++){
+	for(int i=0; i<10; i++){
 		// 데이터 입력(시뮬레이션)
 		
 		if(fgets(name,BUFSIZE+1,stdin) == NULL)
@@ -90,7 +100,6 @@ int main(int argc, char *argv[])
 		
 
 		// '\n' 문자 제거
-		
 		len = strlen(name);
 		if(name[len-1] == '\n')
 			name[len-1] = '\0';
