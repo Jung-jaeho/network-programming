@@ -7,6 +7,8 @@
 #define REMOTEPORT 9000
 #define BUFSIZE    512
 
+struct sockaddr_in serv_addr;
+
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
 {
@@ -64,6 +66,9 @@ int main(int argc, char *argv[])
 	char buf[BUFSIZE+1];
 	int len;
 
+
+	connect(sock,(struct sockaddr*)&serv_addr,sizeof(serv_addr));
+
 	// 브로드캐스트 데이터 보내기
 	while(1){
 		// 데이터 입력
@@ -79,10 +84,9 @@ int main(int argc, char *argv[])
 			break;
 
 		// 데이터 보내기
-		retval = sendto(sock, buf, strlen(buf), 0,
-			(SOCKADDR *)&remoteaddr, sizeof(remoteaddr));
+		retval = send(sock, buf, strlen(buf),0);
 		if(retval == SOCKET_ERROR){
-			err_display("sendto()");
+			err_display("send()");
 			continue;
 		}
 		printf("[UDP] %d바이트를 보냈습니다.\n", retval);
