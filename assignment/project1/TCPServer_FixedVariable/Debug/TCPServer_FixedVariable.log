@@ -1,5 +1,5 @@
-﻿빌드 시작: 2019-04-11 오후 8:40:50
-     1>2 노드의 "C:\Users\301-04\Desktop\TCPServer_FixedVariable\TCPServer_FixedVariable.vcxproj" 프로젝트(build 대상)입니다.
+﻿빌드 시작: 2019-04-16 오전 11:37:06
+     1>2 노드의 "\\Mac\Home\Desktop\Source\assignment\project1\TCPServer_FixedVariable\TCPServer_FixedVariable.vcxproj" 프로젝트(build 대상)입니다.
      1>InitializeBuildStatus:
          "AlwaysCreate"이(가) 지정되었기 때문에 "Debug\TCPServer_FixedVariable.unsuccessfulbuild"을(를) 만들고 있습니다.
        ClCompile:
@@ -13,8 +13,8 @@
        FinalizeBuildStatus:
          "Debug\TCPServer_FixedVariable.unsuccessfulbuild" 파일을 삭제하고 있습니다.
          "Debug\TCPServer_FixedVariable.lastbuildstate"에 연결(touching)하고 있습니다.
-     1>"C:\Users\301-04\Desktop\TCPServer_FixedVariable\TCPServer_FixedVariable.vcxproj" 프로젝트를 빌드했습니다(build 대상).
+     1>"\\Mac\Home\Desktop\Source\assignment\project1\TCPServer_FixedVariable\TCPServer_FixedVariable.vcxproj" 프로젝트를 빌드했습니다(build 대상).
 
 빌드했습니다.
 
-경과 시간: 00:00:00.03
+경과 시간: 00:00:00.08
