@@ -1,3 +1,7 @@
+// 성명: 정재호
+// 학번: 14011078
+// 플랫폼: Visual Studio 2010
+
 #pragma comment(lib, "ws2_32")
 #include <winsock2.h>
 #include <stdlib.h>
@@ -7,7 +11,7 @@
 #define REMOTEPORT 9000
 #define BUFSIZE    512
 
-struct sockaddr_in serv_addr;
+
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
@@ -66,8 +70,7 @@ int main(int argc, char *argv[])
 	char buf[BUFSIZE+1];
 	int len;
 
-
-	connect(sock,(struct sockaddr*)&serv_addr,sizeof(serv_addr));
+	connect(sock, (SOCKADDR *)&remoteaddr, sizeof(remoteaddr));
 
 	// 브로드캐스트 데이터 보내기
 	while(1){
