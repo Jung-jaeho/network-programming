@@ -11,13 +11,9 @@
 #define REMOTEPORT 9000
 #define BUFSIZE    512
 
-<<<<<<< HEAD
 
 
 // ¼ÒÄÏ ÇÔ¼ö ¿À·ù Ãâ·Â ÈÄ Á¾·á
-=======
-// ì†Œì¼“ í•¨ìˆ˜ ì˜¤ë¥˜ ì¶œë ¥ í›„ ì¢…ë£Œ
->>>>>>> 1e9a52a7f190b1fa05f52f3d1759098ca1f82fda
 void err_quit(char *msg)
 {
 	LPVOID lpMsgBuf;
@@ -31,7 +27,7 @@ void err_quit(char *msg)
 	exit(1);
 }
 
-// ì†Œì¼“ í•¨ìˆ˜ ì˜¤ë¥˜ ì¶œë ¥
+// ¼ÒÄÏ ÇÔ¼ö ¿À·ù Ãâ·Â
 void err_display(char *msg)
 {
 	LPVOID lpMsgBuf;
@@ -48,7 +44,7 @@ int main(int argc, char *argv[])
 {
 	int retval;
 
-	// ìœˆì† ì´ˆê¸°í™”
+	// À©¼Ó ÃÊ±âÈ­
 	WSADATA wsa;
 	if(WSAStartup(MAKEWORD(2,2), &wsa) != 0)
 		return 1;
@@ -57,57 +53,52 @@ int main(int argc, char *argv[])
 	SOCKET sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if(sock == INVALID_SOCKET) err_quit("socket()");
 
-	// ë¸Œë¡œë“œìºìŠ¤íŒ… í™œì„±í™”
+	// ºê·ÎµåÄ³½ºÆÃ È°¼ºÈ­
 	BOOL bEnable = TRUE;
 	retval = setsockopt(sock, SOL_SOCKET, SO_BROADCAST,
 		(char *)&bEnable, sizeof(bEnable));
 	if(retval == SOCKET_ERROR) err_quit("setsockopt()");
 
-	// ì†Œì¼“ ì£¼ì†Œ êµ¬ì¡°ì²´ ì´ˆê¸°í™”
+	// ¼ÒÄÏ ÁÖ¼Ò ±¸Á¶Ã¼ ÃÊ±âÈ­
 	SOCKADDR_IN remoteaddr;
 	ZeroMemory(&remoteaddr, sizeof(remoteaddr));
 	remoteaddr.sin_family = AF_INET;
 	remoteaddr.sin_addr.s_addr = inet_addr(REMOTEIP);
 	remoteaddr.sin_port = htons(REMOTEPORT);
 
-	// ë°ì´í„° í†µì‹ ì— ì‚¬ìš©í•  ë³€ìˆ˜
+	// µ¥ÀÌÅÍ Åë½Å¿¡ »ç¿ëÇÒ º¯¼ö
 	char buf[BUFSIZE+1];
 	int len;
 
-<<<<<<< HEAD
 	connect(sock, (SOCKADDR *)&remoteaddr, sizeof(remoteaddr));
 
 	// ºê·ÎµåÄ³½ºÆ® µ¥ÀÌÅÍ º¸³»±â
-=======
-
-	// ë¸Œë¡œë“œìºìŠ¤íŠ¸ ë°ì´í„° ë³´ë‚´ê¸°
->>>>>>> 1e9a52a7f190b1fa05f52f3d1759098ca1f82fda
 	while(1){
-		// ë°ì´í„° ì…ë ¥
-		printf("\n[ë³´ë‚¼ ë°ì´í„°] ");
+		// µ¥ÀÌÅÍ ÀÔ·Â
+		printf("\n[º¸³¾ µ¥ÀÌÅÍ] ");
 		if(fgets(buf, BUFSIZE+1, stdin) == NULL)
 			break;
 
-		// '\n' ë¬¸ì ì œê±°
+		// '\n' ¹®ÀÚ Á¦°Å
 		len = strlen(buf);
 		if(buf[len-1] == '\n')
 			buf[len-1] = '\0';
 		if(strlen(buf) == 0)
 			break;
 
-		// ë°ì´í„° ë³´ë‚´ê¸°
+		// µ¥ÀÌÅÍ º¸³»±â
 		retval = send(sock, buf, strlen(buf),0);
 		if(retval == SOCKET_ERROR){
 			err_display("send()");
 			continue;
 		}
-		printf("[UDP] %dë°”ì´íŠ¸ë¥¼ ë³´ëƒˆìŠµë‹ˆë‹¤.\n", retval);
+		printf("[UDP] %d¹ÙÀÌÆ®¸¦ º¸³Â½À´Ï´Ù.\n", retval);
 	}
 
 	// closesocket()
 	closesocket(sock);
 
-	// ìœˆì† ì¢…ë£Œ
+	// À©¼Ó Á¾·á
 	WSACleanup();
 	return 0;
 }
