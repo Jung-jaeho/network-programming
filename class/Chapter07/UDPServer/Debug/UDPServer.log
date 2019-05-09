@@ -1,0 +1,20 @@
+﻿Build started 2019-05-05 오후 8:09:37.
+     1>Project "\\Mac\Home\Desktop\Source\class\Chapter07\UDPServer\UDPServer.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\UDPServer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\UDPServer.unsuccessfulbuild".
+         Touching "Debug\UDPServer.lastbuildstate".
+     1>Done Building Project "\\Mac\Home\Desktop\Source\class\Chapter07\UDPServer\UDPServer.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.41

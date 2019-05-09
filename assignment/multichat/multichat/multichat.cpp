@@ -7,9 +7,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MULTICASTIP "235.7.8.1"
+//#define MULTICASTIP "235.7.8.1"
 #define REMOTEPORT  9000
 #define BUFSIZE     512
+
+
+char * MULTICASTIP;
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
@@ -69,6 +72,7 @@ DWORD WINAPI Receiver(LPVOID arg)
 	
 	// 멀티캐스트 그룹 가입
 	struct ip_mreq mreq;
+	
 	mreq.imr_multiaddr.s_addr = inet_addr(MULTICASTIP);
 	mreq.imr_interface.s_addr = htonl(INADDR_ANY);
 	retval = setsockopt(sock, IPPROTO_IP, IP_ADD_MEMBERSHIP,
@@ -118,12 +122,33 @@ DWORD WINAPI Receiver(LPVOID arg)
 	WSACleanup();
 	return 0;
 }
+void CHECKIP()
+{
+  char buf[3];
+  int i=0;
+  int cnt=0;
+  char ipaddress[20]="";
+  strcpy(ipaddress,MULTICASTIP);
+  for(i=0;i<strlen(MULTICASTIP);i++)
+  {
+	  if(ipaddress[i]!='.'||ipaddress[i]!=NULL)
+	  {
 
+	  }
+  }
+}
 int main(int argc, char *argv[])
 {
 	char name[10];
+	
+    MULTICASTIP=(char *)malloc(sizeof(char)*16);
+	scanf("%s", MULTICASTIP);
+	CHECKIP();
 	printf("start multicast chat! ip: %s\n", MULTICASTIP);
+	
+
 	printf("enter your nickname:");
+	getchar();
 	gets(name);
 	int retval;
 

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MULTICASTIP "235.7.8.9"
+#define MULTICASTIP "235.7.8.1"
 #define LOCALPORT   9000
 #define BUFSIZE     512
 

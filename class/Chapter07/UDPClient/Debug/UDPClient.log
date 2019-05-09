@@ -1,0 +1,20 @@
+﻿Build started 2019-05-05 오후 7:59:39.
+     1>Project "\\Mac\Home\Desktop\Source\class\Chapter07\UDPClient\UDPClient.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\UDPClient.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\UDPClient.unsuccessfulbuild".
+         Touching "Debug\UDPClient.lastbuildstate".
+     1>Done Building Project "\\Mac\Home\Desktop\Source\class\Chapter07\UDPClient\UDPClient.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.14
