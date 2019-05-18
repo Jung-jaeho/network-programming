@@ -13,6 +13,7 @@
 
 
 char * MULTICASTIP;
+char name[10];
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
@@ -124,32 +125,37 @@ DWORD WINAPI Receiver(LPVOID arg)
 }
 void CHECKIP()
 {
-  char buf[3];
+	//Class D 224.0.0.0 ~ 239.255.2555.255
+  char buf[4]="";
   int i=0;
-  int cnt=0;
-  char ipaddress[20]="";
-  strcpy(ipaddress,MULTICASTIP);
-  for(i=0;i<strlen(MULTICASTIP);i++)
+ 
+  for(i=0;i<3;i++)
   {
-	  if(ipaddress[i]!='.'||ipaddress[i]!=NULL)
-	  {
-
-	  }
+	 buf[i]=MULTICASTIP[i];
+  }
+  if(atoi(buf) >=224 && atoi(buf) <= 239 )
+  {
+	  return;
+  }
+  else
+  {
+	  printf("not in class\n");
   }
 }
-int main(int argc, char *argv[])
+void getip()
 {
-	char name[10];
 	
     MULTICASTIP=(char *)malloc(sizeof(char)*16);
 	scanf("%s", MULTICASTIP);
-	CHECKIP();
 	printf("start multicast chat! ip: %s\n", MULTICASTIP);
-	
-
 	printf("enter your nickname:");
 	getchar();
 	gets(name);
+}
+int main(int argc, char *argv[])
+{
+	getip();
+	CHECKIP();
 	int retval;
 
 	// 윈속 초기화

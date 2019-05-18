@@ -74,9 +74,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IP.cpp" />
+    <ClCompile Include="ipinsert.cpp" />
     <ClCompile Include="multichat.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IP.h" />
+    <ClInclude Include="ipinsert.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="multichat.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="multichat.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
