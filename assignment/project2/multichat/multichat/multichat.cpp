@@ -6,6 +6,8 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
+
 
 //#define MULTICASTIP "235.7.8.1"
 #define REMOTEPORT  9000
@@ -14,6 +16,7 @@
 
 char * MULTICASTIP;
 char name[10];
+
 
 // 소켓 함수 오류 출력 후 종료
 void err_quit(char *msg)
@@ -123,25 +126,6 @@ DWORD WINAPI Receiver(LPVOID arg)
 	WSACleanup();
 	return 0;
 }
-void CHECKIP()
-{
-	//Class D 224.0.0.0 ~ 239.255.2555.255
-  char buf[4]="";
-  int i=0;
- 
-  for(i=0;i<3;i++)
-  {
-	 buf[i]=MULTICASTIP[i];
-  }
-  if(atoi(buf) >=224 && atoi(buf) <= 239 )
-  {
-	  return;
-  }
-  else
-  {
-	  printf("not in class\n");
-  }
-}
 void getip()
 {
 	
@@ -155,8 +139,16 @@ void getip()
 int main(int argc, char *argv[])
 {
 	getip();
-	CHECKIP();
 	int retval;
+	
+	struct tm *t;
+	time_t timer; //time 
+
+	timer = time(NULL);
+	t = localtime(&timer);
+
+
+
 
 	// 윈속 초기화
 	WSADATA wsa;
@@ -206,8 +198,7 @@ int main(int argc, char *argv[])
 			break;
 
 		// 데이터 보내기
-		retval = sendto(sock, name, strlen(name), 0,
-		(SOCKADDR *)&remoteaddr, sizeof(remoteaddr));
+		retval = sendto(sock, name, strlen(name), 0,(SOCKADDR *)&remoteaddr, sizeof(remoteaddr));
 		if(retval == SOCKET_ERROR){
 			err_display("sendto()");
 			continue;
