@@ -1,7 +1,7 @@
-﻿Build started 2019-05-20 오후 5:21:16.
+﻿Build started 2019-05-20 오후 10:31:13.
      1>Project "\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\DlgApp.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\DlgApp.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\DlgApp.unsuccessfulbuild".
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DlgApp.cpp
          DlgApp.cpp
@@ -19,17 +19,9 @@
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\Debug\DlgApp.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\DlgApp.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\Debug\DlgApp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\Debug\DlgApp.lib" /MACHINE:X86 Debug\DlgApp.res
          Debug\DlgApp.exe.embed.manifest.res
          Debug\DlgApp.obj
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\DlgApp.exe.embed.manifest" /manifest Debug\DlgApp.exe.intermediate.manifest
-         All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         DlgApp.vcxproj -> \\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\Debug\DlgApp.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\DlgApp.unsuccessfulbuild".
-         Touching "Debug\DlgApp.lastbuildstate".
-     1>Done Building Project "\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\DlgApp.vcxproj" (build target(s)).
+     1>LINK : fatal error LNK1168: cannot open \\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\Debug\DlgApp.exe for writing
+     1>Done Building Project "\\Mac\Home\Desktop\Source\class\Chapter09\DlgApp\DlgApp.vcxproj" (build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.20
+Time Elapsed 00:00:13.54

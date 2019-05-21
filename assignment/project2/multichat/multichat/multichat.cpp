@@ -92,16 +92,13 @@ DWORD WINAPI Receiver(LPVOID arg)
 	while(1){
 		// 데이터 받기
 		addrlen = sizeof(peeraddr);
-
-		retval = recvfrom(sock, name, 10, 0, 
-			(SOCKADDR *)&peeraddr, &addrlen);
+		retval = recvfrom(sock, name, 10, 0, (SOCKADDR *)&peeraddr, &addrlen);
 		if(retval == SOCKET_ERROR){
 			err_display("recvfrom()");
 			continue;
 		}
 		name[retval] = '\0';
-		retval = recvfrom(sock, buf, BUFSIZE, 0, 
-			(SOCKADDR *)&peeraddr, &addrlen);
+		retval = recvfrom(sock, buf, BUFSIZE, 0, (SOCKADDR *)&peeraddr, &addrlen);
 		if(retval == SOCKET_ERROR){
 			err_display("recvfrom()");
 			continue;

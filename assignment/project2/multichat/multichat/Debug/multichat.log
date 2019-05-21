@@ -1,4 +1,4 @@
-﻿Build started 2019-05-20 오후 6:11:13.
+﻿Build started 2019-05-20 오후 6:28:54.
      1>Project "\\Mac\Home\Desktop\Source\assignment\project2\multichat\multichat\multichat.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\multichat.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -17,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.12
+Time Elapsed 00:00:00.10
