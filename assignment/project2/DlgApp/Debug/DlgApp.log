@@ -1,31 +1,43 @@
-﻿Build started 2019-05-20 오후 10:00:03.
-     1>Project "\\Mac\Home\Desktop\Source\assignment\project2\DlgApp\DlgApp.vcxproj" on node 2 (build target(s)).
+﻿Build started 2019-05-23 오후 10:46:58.
+     1>Project "C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\DlgApp.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\DlgApp.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DlgApp.cpp
          DlgApp.cpp
-     1>\\mac\home\desktop\source\assignment\project2\dlgapp\dlgapp.cpp(86): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(75): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(134): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\time.inl(112) : see declaration of 'localtime'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(215): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(277): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(320): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : see declaration of 'itoa'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(328): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\sejong\documents\카카오톡 받은 파일\dlgapp\dlgapp.cpp(372): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'vsprintf'
        ResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /l"0x0409" /nologo /fo"Debug\DlgApp.res" DlgApp.rc 
+         All outputs are up-to-date.
        ManifestResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\DlgApp.exe.embed.manifest.res" Debug\DlgApp_manifest.rc 
+         All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\Mac\Home\Desktop\Source\assignment\project2\DlgApp\Debug\DlgApp.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\DlgApp.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"\\Mac\Home\Desktop\Source\assignment\project2\DlgApp\Debug\DlgApp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\Mac\Home\Desktop\Source\assignment\project2\DlgApp\Debug\DlgApp.lib" /MACHINE:X86 Debug\DlgApp.res
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\Debug\DlgApp.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\DlgApp.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\Debug\DlgApp.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\Debug\DlgApp.lib" /MACHINE:X86 Debug\DlgApp.res
          Debug\DlgApp.exe.embed.manifest.res
          Debug\DlgApp.obj
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\DlgApp.exe.embed.manifest" /manifest Debug\DlgApp.exe.intermediate.manifest
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\DlgApp.exe.embed.manifest" /manifest Debug\DlgApp.exe.intermediate.manifest
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         DlgApp.vcxproj -> \\Mac\Home\Desktop\Source\assignment\project2\DlgApp\Debug\DlgApp.exe
+         DlgApp.vcxproj -> C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\Debug\DlgApp.exe
        FinalizeBuildStatus:
          Deleting file "Debug\DlgApp.unsuccessfulbuild".
          Touching "Debug\DlgApp.lastbuildstate".
-     1>Done Building Project "\\Mac\Home\Desktop\Source\assignment\project2\DlgApp\DlgApp.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\sejong\Documents\카카오톡 받은 파일\DlgApp\DlgApp.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.94
+Time Elapsed 00:00:01.49
